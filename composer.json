@@ -1,0 +1,33 @@
+{
+    "name":        "productsupcom/guzzle-react-bridge",
+    "type":        "library",
+    "description": "Guzzle HTTP client bridge with ReactPHP event loop",
+    "keywords":    ["react", "guzzle", "http", "async", "promises", "curl"],
+    "homepage":    "http://github.com/productsupcom/guzzle-react-bridge",
+    "license":     "MIT",
+    "support":     {
+        "issues": "https://github.com/productsupcom/guzzle-react-bridge/issues"
+    },
+    "authors": [
+        {
+            "name":     "Alexey Shokov",
+            "email":    "alexey@shockov.com"
+        }
+    ],
+    "require": {
+        "react/event-loop": "^0.4",
+        "guzzlehttp/promises": "^1.3",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Productsup\\GuzzleReactBridge\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    }
+}
