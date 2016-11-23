@@ -20,7 +20,7 @@
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
-
+        "monolog/monolog": "~1.20"
     },
     "autoload": {
         "psr-4": {
