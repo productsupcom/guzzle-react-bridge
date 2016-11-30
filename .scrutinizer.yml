@@ -1,0 +1,15 @@
+imports:
+  - php
+
+tools:
+  php_code_sniffer:
+    config:
+      standard: PSR2
+
+  php_analyzer:
+
+  php_sim:
+
+filter:
+  excluded_paths:
+    - vendor/*
