@@ -20,8 +20,8 @@ $genFn = function (ClientInterface $client, LoggerInterface $logger) {
         $logger->debug('Query placed in the queue...');
 
         yield $client->getAsync($link)->then(
-            function ($result) use ($logger) { $logger->info('Query completed.'); },
-            function ($reason) use ($logger) { $logger->error('Query failed'); }
+            function ($result) use ($logger) { $logger->info('Query completed!'); },
+            function ($reason) use ($logger) { $logger->error('Query failed :('); }
         );
     }
 };
