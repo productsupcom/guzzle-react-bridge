@@ -51,4 +51,6 @@ run_coroutine_fn(function ($loop) use ($genFn) {
 
     // This will done only after the completion of all calls in each_limit().
     echo 'Done!';
+
+    return 0;
 });
