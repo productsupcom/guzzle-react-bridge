@@ -35,7 +35,7 @@ function run(callable $action)
  *
  * @param callable $coroutine
  *
- * @return void
+ * @return mixed
  */
 function run_coroutine_fn(callable $coroutine)
 {
@@ -47,13 +47,35 @@ function run_coroutine_fn(callable $coroutine)
 
     \GuzzleHttp\Promise\queue(new ReactTaskQueue($loop));
 
-    $loop->nextTick(function () use ($coroutineFn) {
-        $coroutineInvocation = coroutine($coroutineFn);
+    $globalResult = null;
+    /** @var \Exception $globalError */
+    $globalError = null;
+
+    $loop->nextTick(function () use ($coroutineFn, &$globalResult, &$globalError) {
+        $coroutineInvocation = coroutine($coroutineFn)
+            ->then(function ($result) use (&$globalResult) {
+                return $globalResult = $result;
+            })
+            ->otherwise(function ($reason) use (&$globalError) {
+                $globalError = \GuzzleHttp\Promise\exception_for($reason);
+
+                // Reject it again, don't change the state.
+                return \GuzzleHttp\Promise\rejection_for($reason);
+            })
+        ;
 
         // Here we are, waiting for the coroutine (promise) to complete.
     });
 
     $loop->run();
+
+    // And check whether there is an exception or not...
+    if ($globalError) {
+        throw $globalError;
+    }
+
+    // TODO Support it.
+    return $globalResult;
 }
 
 /**
