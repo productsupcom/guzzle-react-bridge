@@ -5,7 +5,7 @@ namespace Productsup\GuzzleReactBridge;
 use GuzzleHttp\Handler\CurlMultiHandler as BaseCurlMultiHandler;
 use Psr\Http\Message\RequestInterface;
 use React\EventLoop\LoopInterface;
-use React\EventLoop\Timer\TimerInterface;
+use React\EventLoop\TimerInterface;
 
 class CurlMultiHandler extends BaseCurlMultiHandler
 {
