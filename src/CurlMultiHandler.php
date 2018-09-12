@@ -54,7 +54,7 @@ class CurlMultiHandler extends BaseCurlMultiHandler
 
         // Deactive timer if there are no more active requests.
         if (!$this->activeRequests && $this->timer) {
-            $this->timer->cancel();
+            $this->loop->cancelTimer($this->timer);
             // Don't use unset(), it completely removes property from the object, so next access will be handled by
             // parent's __get()!
             $this->timer = null;

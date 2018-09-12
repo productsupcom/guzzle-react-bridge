@@ -151,7 +151,7 @@ class Throttler
     {
         // Nothing to do. Remove the timer, if there is one...
         if (!$this->activeCalls && !count($this->queue) && $this->timer) {
-            $this->timer->cancel();
+            $this->loop->cancelTimer($this->timer);
             // Don't use unset(), it completely removes property from the object!
             $this->timer = null;
         }
