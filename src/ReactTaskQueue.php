@@ -24,6 +24,6 @@ class ReactTaskQueue extends TaskQueue
     {
         parent::add($task);
 
-        $this->loop->nextTick([$this, 'run']);
+        $this->loop->futureTick([$this, 'run']);
     }
 }

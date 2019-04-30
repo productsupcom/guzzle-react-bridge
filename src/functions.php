@@ -23,7 +23,9 @@ function run(callable $action)
 
     \GuzzleHttp\Promise\queue(new ReactTaskQueue($loop));
 
-    $loop->nextTick($action);
+    $loop->futureTick(function() use ($loop, $action){
+        $action($loop);
+    });
 
     $loop->run();
 }
@@ -51,7 +53,7 @@ function run_coroutine_fn(callable $coroutine)
     /** @var \Exception $globalError */
     $globalError = null;
 
-    $loop->nextTick(function () use ($coroutineFn, &$globalResult, &$globalError) {
+    $loop->futureTick(function () use ($coroutineFn, &$globalResult, &$globalError) {
         $coroutineInvocation = coroutine($coroutineFn)
             ->then(function ($result) use (&$globalResult) {
                 return $globalResult = $result;

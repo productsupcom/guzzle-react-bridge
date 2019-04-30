@@ -9,7 +9,7 @@ use function Productsup\GuzzleReactBridge\run;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-run(function ($loop) use ($genFn) {
+run(function ($loop) {
     // Logger to show pretty messages with timestamps.
     $logger = new Logger('default');
     $logger->pushHandler(new StreamHandler('php://stdout', Logger::INFO));

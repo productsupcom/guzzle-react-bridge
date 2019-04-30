@@ -6,7 +6,7 @@ use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 use React\EventLoop\LoopInterface;
-use React\EventLoop\Timer\TimerInterface;
+use React\EventLoop\TimerInterface;
 
 /**
  * Abstract throttler for any async actions (that produce promises)
@@ -151,7 +151,7 @@ class Throttler
     {
         // Nothing to do. Remove the timer, if there is one...
         if (!$this->activeCalls && !count($this->queue) && $this->timer) {
-            $this->timer->cancel();
+            $this->loop->cancelTimer($this->timer);
             // Don't use unset(), it completely removes property from the object!
             $this->timer = null;
         }
